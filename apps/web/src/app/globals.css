@@ -1,0 +1,80 @@
+:root {
+  color-scheme: light;
+  --bg: #f4efe6;
+  --panel: rgba(255, 252, 246, 0.8);
+  --border: rgba(48, 36, 24, 0.12);
+  --text: #1f1a16;
+  --muted: #5e5147;
+  --accent: #8d4f2b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    radial-gradient(circle at top, rgba(141, 79, 43, 0.18), transparent 35%),
+    linear-gradient(180deg, #f6f1e8 0%, #efe7da 100%);
+  color: var(--text);
+}
+
+body {
+  min-height: 100vh;
+}
+
+.page-shell {
+  width: min(1080px, calc(100% - 3rem));
+  margin: 0 auto;
+  padding: 6rem 0;
+}
+
+.hero {
+  max-width: 44rem;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: var(--accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.92;
+}
+
+.lede {
+  margin-top: 1.5rem;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.feature-card {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: var(--panel);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 20px 60px rgba(58, 39, 20, 0.08);
+}
+
+.feature-card p {
+  margin: 0;
+  line-height: 1.6;
+}
