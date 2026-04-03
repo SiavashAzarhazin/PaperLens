@@ -54,4 +54,5 @@ This repository is currently in scaffold mode. The first implementation mileston
 ## Docs
 
 - [Architecture](/Users/vashprime/Documents/Repository/Side%20Projects/PaperLens/docs/architecture.md)
+- [Local development](/Users/vashprime/Documents/Repository/Side%20Projects/PaperLens/docs/local-development.md)
 - [Roadmap](/Users/vashprime/Documents/Repository/Side%20Projects/PaperLens/docs/roadmap.md)

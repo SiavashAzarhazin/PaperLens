@@ -2,7 +2,7 @@
 name = "paperlens-ai"
 version = "0.1.0"
 description = "FastAPI service for document ingestion, OCR, extraction, and grounded retrieval."
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 dependencies = [
   "fastapi>=0.115.0,<1.0.0",
   "uvicorn[standard]>=0.34.0,<1.0.0",

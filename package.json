@@ -2,10 +2,14 @@
   "name": "paperlens",
   "private": true,
   "version": "0.1.0",
-  "packageManager": "pnpm@10.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev:web": "pnpm --filter web dev",
-    "build:web": "pnpm --filter web build",
-    "lint:web": "pnpm --filter web lint"
+    "dev:web": "npm run dev --workspace @paperlens/web",
+    "build:web": "npm run build --workspace @paperlens/web",
+    "lint:web": "npm run lint --workspace @paperlens/web",
+    "dev:ai": "python3 -m uvicorn app.main:app --app-dir services/ai --reload --port 8000"
   }
 }

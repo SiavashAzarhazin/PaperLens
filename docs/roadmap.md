@@ -6,6 +6,7 @@
 - Add the AI service health endpoint
 - Define shared document types
 - Decide local development workflow
+- Make both services runnable on a fresh machine
 
 ## Phase 2: Ingestion pipeline
 
