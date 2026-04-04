@@ -2,17 +2,15 @@ import { randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import type { DocumentRecord, DocumentSourceKind, DocumentStatus } from "@paperlens/shared";
+import type {
+  DocumentAnalysis,
+  DocumentRecord,
+  DocumentSourceKind,
+  DocumentStatus
+} from "@paperlens/shared";
 
 const uploadsDirectory = path.join(process.cwd(), "..", "..", "uploads", "documents");
 const metadataPath = path.join(uploadsDirectory, "index.json");
-
-const nextStatusByCurrentStatus: Partial<Record<DocumentStatus, DocumentStatus>> = {
-  uploaded: "queued",
-  queued: "processing",
-  processing: "ready",
-  failed: "queued"
-};
 
 const statusEventMessage: Record<DocumentStatus, string> = {
   uploaded: "Document uploaded to local storage.",
@@ -59,7 +57,8 @@ export async function readDocumentIndex(): Promise<DocumentRecord[]> {
         storagePath: document.storagePath ?? "",
         createdAt,
         updatedAt: document.updatedAt ?? createdAt,
-        lastEvent: document.lastEvent ?? statusEventMessage[status]
+        lastEvent: document.lastEvent ?? statusEventMessage[status],
+        analysis: document.analysis ?? null
       };
     });
   } catch (error) {
@@ -103,7 +102,8 @@ export async function createDocumentRecord(file: File) {
     storagePath,
     createdAt: timestamp,
     updatedAt: timestamp,
-    lastEvent: statusEventMessage.uploaded
+    lastEvent: statusEventMessage.uploaded,
+    analysis: null
   };
 
   documents.unshift(document);
@@ -112,7 +112,14 @@ export async function createDocumentRecord(file: File) {
   return document;
 }
 
-export async function advanceDocumentStatus(documentId: string) {
+export async function updateDocumentProcessingState(
+  documentId: string,
+  updates: {
+    nextStatus: DocumentStatus;
+    lastEvent: string;
+    analysis: DocumentAnalysis | null;
+  }
+) {
   await ensureStorage();
   const documents = await readDocumentIndex();
   const documentIndex = documents.findIndex((document) => document.id === documentId);
@@ -122,17 +129,12 @@ export async function advanceDocumentStatus(documentId: string) {
   }
 
   const currentDocument = documents[documentIndex];
-  const nextStatus = nextStatusByCurrentStatus[currentDocument.status];
-
-  if (!nextStatus) {
-    return currentDocument;
-  }
-
   const updatedDocument: DocumentRecord = {
     ...currentDocument,
-    status: nextStatus,
+    status: updates.nextStatus,
     updatedAt: new Date().toISOString(),
-    lastEvent: statusEventMessage[nextStatus]
+    lastEvent: updates.lastEvent,
+    analysis: updates.analysis
   };
 
   documents[documentIndex] = updatedDocument;
