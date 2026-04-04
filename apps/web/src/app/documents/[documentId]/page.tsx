@@ -122,6 +122,23 @@ export default async function DocumentDetailPage({
               </div>
 
               <div>
+                <p className="event-log-label">Document reading</p>
+                <dl className="detail-meta-grid">
+                  <div>
+                    <dt>Page count</dt>
+                    <dd>{document.analysis.pageCount ?? "Unknown"}</dd>
+                  </div>
+                  <div className="detail-meta-span">
+                    <dt>Text preview</dt>
+                    <dd>
+                      {document.analysis.textPreview ??
+                        "No native text extracted yet. This usually means the file needs OCR or is not a text-based PDF."}
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div>
                 <p className="event-log-label">Extracted fields</p>
                 <dl className="detail-meta-grid">
                   {document.analysis.extractedFields.map((field) => (

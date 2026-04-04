@@ -14,6 +14,8 @@ export type ExtractedField = {
 
 export type DocumentAnalysis = {
   summary: string;
+  pageCount: number | null;
+  textPreview: string | null;
   extractedFields: ExtractedField[];
   suggestedActions: string[];
 };
@@ -43,7 +45,13 @@ export type ListDocumentsResponse = {
 export type ProcessDocumentRequest = {
   document: Pick<
     DocumentRecord,
-    "id" | "filename" | "mimeType" | "sizeBytes" | "sourceKind" | "status"
+    | "id"
+    | "filename"
+    | "mimeType"
+    | "sizeBytes"
+    | "sourceKind"
+    | "status"
+    | "storagePath"
   >;
 };
 
