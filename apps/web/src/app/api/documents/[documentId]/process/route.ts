@@ -26,7 +26,8 @@ export async function POST(_request: Request, context: ProcessRouteContext) {
       mimeType: document.mimeType,
       sizeBytes: document.sizeBytes,
       sourceKind: document.sourceKind,
-      status: document.status
+      status: document.status,
+      storagePath: document.storagePath
     }
   };
 
