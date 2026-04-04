@@ -16,6 +16,8 @@ export type DocumentRecord = {
   status: DocumentStatus;
   storagePath: string;
   createdAt: string;
+  updatedAt: string;
+  lastEvent: string;
 };
 
 export type CreateDocumentResponse = {

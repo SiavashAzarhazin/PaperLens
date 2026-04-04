@@ -30,6 +30,10 @@ body {
   min-height: 100vh;
 }
 
+a {
+  color: inherit;
+}
+
 .page-shell {
   width: min(1080px, calc(100% - 3rem));
   margin: 0 auto;
@@ -99,6 +103,36 @@ body {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem;
   margin-top: 2.5rem;
+}
+
+.detail-shell {
+  padding-top: 3rem;
+}
+
+.detail-grid {
+  margin-top: 1.5rem;
+}
+
+.detail-back-link {
+  margin-bottom: 1rem;
+}
+
+.detail-back-link a,
+.detail-link {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.detail-back-link a:hover,
+.detail-link:hover {
+  text-decoration: underline;
+}
+
+.detail-hero h1 {
+  margin: 0;
+  font-size: clamp(2.3rem, 6vw, 4rem);
+  line-height: 1;
 }
 
 .panel-header {
@@ -249,6 +283,59 @@ body {
   line-height: 1.5;
 }
 
+.detail-link {
+  display: inline-flex;
+  margin-top: 1rem;
+}
+
+.detail-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.detail-meta-grid dt {
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.detail-meta-grid dd {
+  margin: 0.25rem 0 0;
+  line-height: 1.6;
+}
+
+.detail-meta-span {
+  grid-column: 1 / -1;
+}
+
+.event-log {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.event-log-label {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.event-log p:last-child {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.process-actions {
+  margin-top: 1rem;
+}
+
 .status-badge {
   display: inline-flex;
   align-items: center;
@@ -284,7 +371,8 @@ body {
 
   .hero-grid,
   .workspace-grid,
-  .document-meta {
+  .document-meta,
+  .detail-meta-grid {
     grid-template-columns: 1fr;
   }
 

@@ -2,6 +2,7 @@
 
 import type { ChangeEvent, FormEvent } from "react";
 import type { CreateDocumentResponse, DocumentRecord, ListDocumentsResponse } from "@paperlens/shared";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const featurePillars = [
@@ -198,6 +199,10 @@ export default function HomePage() {
                       <dd>{new Date(document.createdAt).toLocaleString()}</dd>
                     </div>
                   </dl>
+
+                  <Link className="detail-link" href={`/documents/${document.id}`}>
+                    Open document detail →
+                  </Link>
                 </article>
               ))}
             </div>
