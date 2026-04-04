@@ -109,6 +109,47 @@ export default async function DocumentDetailPage({
           />
         </article>
       </section>
+
+      <section className="workspace-grid detail-grid">
+        <article className="panel">
+          <p className="panel-label">AI readout</p>
+          <h2>Current analysis snapshot</h2>
+          {document.analysis ? (
+            <div className="analysis-stack">
+              <div className="event-log">
+                <p className="event-log-label">Summary</p>
+                <p>{document.analysis.summary}</p>
+              </div>
+
+              <div>
+                <p className="event-log-label">Extracted fields</p>
+                <dl className="detail-meta-grid">
+                  {document.analysis.extractedFields.map((field) => (
+                    <div key={field.label}>
+                      <dt>{field.label}</dt>
+                      <dd>{field.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+
+              <div>
+                <p className="event-log-label">Suggested actions</p>
+                <ul className="pillar-list">
+                  {document.analysis.suggestedActions.map((action) => (
+                    <li key={action}>{action}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <p className="empty-state">
+              No AI analysis yet. Advance the pipeline to let the Python service
+              inspect this document and return a first-pass readout.
+            </p>
+          )}
+        </article>
+      </section>
     </main>
   );
 }

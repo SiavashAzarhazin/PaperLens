@@ -7,6 +7,17 @@ export type DocumentStatus =
   | "ready"
   | "failed";
 
+export type ExtractedField = {
+  label: string;
+  value: string;
+};
+
+export type DocumentAnalysis = {
+  summary: string;
+  extractedFields: ExtractedField[];
+  suggestedActions: string[];
+};
+
 export type DocumentRecord = {
   id: string;
   filename: string;
@@ -18,6 +29,7 @@ export type DocumentRecord = {
   createdAt: string;
   updatedAt: string;
   lastEvent: string;
+  analysis: DocumentAnalysis | null;
 };
 
 export type CreateDocumentResponse = {
@@ -26,4 +38,17 @@ export type CreateDocumentResponse = {
 
 export type ListDocumentsResponse = {
   documents: DocumentRecord[];
+};
+
+export type ProcessDocumentRequest = {
+  document: Pick<
+    DocumentRecord,
+    "id" | "filename" | "mimeType" | "sizeBytes" | "sourceKind" | "status"
+  >;
+};
+
+export type ProcessDocumentResponse = {
+  nextStatus: DocumentStatus;
+  lastEvent: string;
+  analysis: DocumentAnalysis | null;
 };
