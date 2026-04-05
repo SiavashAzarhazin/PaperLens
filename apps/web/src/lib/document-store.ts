@@ -20,6 +20,23 @@ const statusEventMessage: Record<DocumentStatus, string> = {
   failed: "Document processing failed and needs attention."
 };
 
+function normalizeAnalysis(
+  analysis: Partial<DocumentAnalysis> | null | undefined
+): DocumentAnalysis | null {
+  if (!analysis) {
+    return null;
+  }
+
+  return {
+    summary: analysis.summary ?? "No summary available.",
+    pageCount: analysis.pageCount ?? null,
+    textPreview: analysis.textPreview ?? null,
+    textSource: analysis.textSource ?? "none",
+    extractedFields: analysis.extractedFields ?? [],
+    suggestedActions: analysis.suggestedActions ?? []
+  };
+}
+
 export function inferSourceKind(mimeType: string, filename: string): DocumentSourceKind {
   const normalizedName = filename.toLowerCase();
 
@@ -58,7 +75,7 @@ export async function readDocumentIndex(): Promise<DocumentRecord[]> {
         createdAt,
         updatedAt: document.updatedAt ?? createdAt,
         lastEvent: document.lastEvent ?? statusEventMessage[status],
-        analysis: document.analysis ?? null
+        analysis: normalizeAnalysis(document.analysis)
       };
     });
   } catch (error) {
