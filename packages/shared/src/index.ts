@@ -16,6 +16,7 @@ export type DocumentAnalysis = {
   summary: string;
   pageCount: number | null;
   textPreview: string | null;
+  textSource: "native_pdf" | "ocr_pdf" | "ocr_image" | "none";
   extractedFields: ExtractedField[];
   suggestedActions: string[];
 };

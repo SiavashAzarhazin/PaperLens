@@ -128,6 +128,10 @@ export default async function DocumentDetailPage({
                     <dt>Page count</dt>
                     <dd>{document.analysis.pageCount ?? "Unknown"}</dd>
                   </div>
+                  <div>
+                    <dt>Text source</dt>
+                    <dd>{document.analysis.textSource}</dd>
+                  </div>
                   <div className="detail-meta-span">
                     <dt>Text preview</dt>
                     <dd>
